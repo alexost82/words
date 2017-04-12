@@ -30,12 +30,12 @@ answer = ''
 while answer != 'в':
     #asking user for a letter
     answer = input('\nДе додати літеру? початок/кінець/вийти [п/к/в] ')
-    print (answer.encode('utf-8').decode('utf-8'))
+    #print (answer.encode('utf-8').decode('utf-8'))
     if answer == 'к':
-        letter = input('\nНапиши літеру: ')
+        letter = input('\nНапиши літеру: ').encode('utf-8').decode('utf-8')
         game += letter
     elif answer == 'п':
-        letter = input('\nНапиши літеру: ')
+        letter = input('\nНапиши літеру: ').encode('utf-8').decode('utf-8')
         game = letter + game
     elif answer == 'в':
         print ('Виходимо з гри...')
@@ -78,7 +78,7 @@ while answer != 'в':
         index = word.find(game)
         if index != -1:
             ai_word = word
-            print ('ai choice now:', ai_word)
+            print ('вибір компютера:', ai_word)
             if index == 0:
                 game +=  ai_word[len(game)]
             else:
@@ -90,8 +90,8 @@ while answer != 'в':
         break
 
     if game in words:
-        print ('n\Виграш. Я закінчив слово:', game)
-        answer = 'Q'
+        print ('\nВиграш. Я закінчив слово:', game)
+        answer = 'в'
         continue
 
-    print ('Add a letter before or after: "' + game + '"')
+    print ('\nДодай літеру на початку або в кінці слова: "' + game + '"')
