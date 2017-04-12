@@ -7,51 +7,50 @@ print (sys.stdout.encoding)
 print (sys.getdefaultencoding())
 
 #load file
-with codecs.open('words_ukr.txt', encoding='utf-8') as f:
+with open('words_ukr.txt', encoding='utf-8') as f:
 #with open('words_eng.txt') as f:
 #    for i in f:
  #       print i.decode('utf-8')
         #.encode('cp1252', 'replace')
-        #encode('utf-8')
         
     words = set( line.strip() for line in f.readlines() )
-    for i in words:
-        print (i)
-        #.encode('utf-8', 'ignore')
+    #for i in words:
+        #print (i)
         #.encode('utf-8', 'ignore')
 #creating dictionary
-words = { word.upper() : len(word) for word in words if len(word) > 2 }
+words = { word : len(word) for word in words if len(word) > 2 }
 
-print ("\nLet's start the fight!\n")
+print ("\nПочинаємо!\n")
 # first letter random choice
-game = random.choice(string.ascii_uppercase)
-print ('The first letter is "' + game + '"')
+game = random.choice('абвгґдеєжзиіїйклмнопрстуфхцчшщьюя')
+print ('Це перша літера: "' + game + '"')
 
 answer = ''
 #main loop
-while answer != 'Q':
+while answer != 'в':
     #asking user for a letter
-    answer = input('\nwhere do you want to add a letter? start/end/quit [s/e/q] ').upper()
-    if answer == 'E':
-        letter = input('\nPlease provide a letter: ').upper()
+    answer = input('\nДе додати літеру? початок/кінець/вийти [п/к/в] ')
+    print (answer.encode('utf-8').decode('utf-8'))
+    if answer == 'к':
+        letter = input('\nНапиши літеру: ')
         game += letter
-    elif answer == 'S':
-        letter = input('\nPlease provide a letter: ').upper()
+    elif answer == 'п':
+        letter = input('\nНапиши літеру: ')
         game = letter + game
-    elif answer == 'Q':
-        print ('quitting the game...')
+    elif answer == 'в':
+        print ('Виходимо з гри...')
         break
     else:
-        print ('not valid input, try once again')
+        print ('Спробуй ще раз, але правильно')
         continue
 
     #checking if user completed the word
     if game in words:
-        print ('\nYou lost! you completed the word:', game)
-        answer = 'Q'
+        print ('\nПрограш. Ти закінчив слово:', game)
+        answer = 'в'
         continue
 
-    #removing non-mathing words from dictionary
+    #removing non-matсhing words from dictionary
     tempwords = words.copy()
     for word in tempwords:
         index = word.find(game)
@@ -87,11 +86,11 @@ while answer != 'Q':
 
             break
     else:
-        print ('no such word in my dictionary', game)
+        print ('немає в словнику такого: ', game)
         break
 
     if game in words:
-        print ('\nYou win! I completed the word:', game)
+        print ('n\Виграш. Я закінчив слово:', game)
         answer = 'Q'
         continue
 
