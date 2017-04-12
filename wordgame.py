@@ -32,10 +32,10 @@ while answer != 'в':
     answer = input('\nДе додати літеру? початок/кінець/вийти [п/к/в] ')
     #print (answer.encode('utf-8').decode('utf-8'))
     if answer == 'к':
-        letter = input('\nНапиши літеру: ').encode('utf-8').decode('utf-8')
+        letter = input('\nНапиши літеру: ')
         game += letter
     elif answer == 'п':
-        letter = input('\nНапиши літеру: ').encode('utf-8').decode('utf-8')
+        letter = input('\nНапиши літеру: ')
         game = letter + game
     elif answer == 'в':
         print ('Виходимо з гри...')
