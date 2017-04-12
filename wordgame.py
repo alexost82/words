@@ -6,8 +6,6 @@ import sys, codecs
 print (sys.stdout.encoding)
 print (sys.getdefaultencoding())
 
-print (sys.stdout.encoding)
-print (sys.getdefaultencoding())
 #load file
 with codecs.open('words_ukr.txt', encoding='utf-8') as f:
 #with open('words_eng.txt') as f:
@@ -16,7 +14,7 @@ with codecs.open('words_ukr.txt', encoding='utf-8') as f:
         #.encode('cp1252', 'replace')
         #encode('utf-8')
         
-    words = set( line.strip().decode('cp437') for line in f.readlines() )
+    words = set( line.strip() for line in f.readlines() )
     for i in words:
         print (i)
         #.encode('utf-8', 'ignore')
@@ -26,19 +24,19 @@ words = { word.upper() : len(word) for word in words if len(word) > 2 }
 
 print ("\nLet's start the fight!\n")
 # first letter random choice
-game = random.choice(string.uppercase)
+game = random.choice(string.ascii_uppercase)
 print ('The first letter is "' + game + '"')
 
 answer = ''
 #main loop
 while answer != 'Q':
     #asking user for a letter
-    answer = raw_input('\nwhere do you want to add a letter? start/end/quit [s/e/q] ').upper()
+    answer = input('\nwhere do you want to add a letter? start/end/quit [s/e/q] ').upper()
     if answer == 'E':
-        letter = raw_input('\nPlease provide a letter: ').upper()
+        letter = input('\nPlease provide a letter: ').upper()
         game += letter
     elif answer == 'S':
-        letter = raw_input('\nPlease provide a letter: ').upper()
+        letter = input('\nPlease provide a letter: ').upper()
         game = letter + game
     elif answer == 'Q':
         print ('quitting the game...')
