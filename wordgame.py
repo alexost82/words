@@ -1,17 +1,33 @@
-import random
-import string
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*- 
 
+import random, string
+import sys, codecs
+print (sys.stdout.encoding)
+print (sys.getdefaultencoding())
+
+print (sys.stdout.encoding)
+print (sys.getdefaultencoding())
 #load file
-#with open('words_ukr.txt') as f:
-with open('words_eng.txt') as f:
-    words = set( line.strip() for line in f.readlines() )
+with codecs.open('words_ukr.txt', encoding='utf-8') as f:
+#with open('words_eng.txt') as f:
+#    for i in f:
+ #       print i.decode('utf-8')
+        #.encode('cp1252', 'replace')
+        #encode('utf-8')
+        
+    words = set( line.strip().decode('cp437') for line in f.readlines() )
+    for i in words:
+        print (i)
+        #.encode('utf-8', 'ignore')
+        #.encode('utf-8', 'ignore')
 #creating dictionary
 words = { word.upper() : len(word) for word in words if len(word) > 2 }
 
-print "\nLet's start the fight!\n"
+print ("\nLet's start the fight!\n")
 # first letter random choice
 game = random.choice(string.uppercase)
-print 'The first letter is "' + game + '"'
+print ('The first letter is "' + game + '"')
 
 answer = ''
 #main loop
@@ -25,15 +41,15 @@ while answer != 'Q':
         letter = raw_input('\nPlease provide a letter: ').upper()
         game = letter + game
     elif answer == 'Q':
-        print 'quitting the game...'
+        print ('quitting the game...')
         break
     else:
-        print 'not valid input, try once again'
+        print ('not valid input, try once again')
         continue
 
     #checking if user completed the word
     if game in words:
-        print '\nYou lost! you completed the word:', game
+        print ('\nYou lost! you completed the word:', game)
         answer = 'Q'
         continue
 
@@ -43,7 +59,7 @@ while answer != 'Q':
         index = word.find(game)
         if index == -1:
             del words[word]
-    print len(words)
+    print (len(words))
 
     #removing plural form
     if len(game) == 2:
@@ -59,13 +75,13 @@ while answer != 'Q':
                        + [ word for word in sorted_words if len(word) % 2  ]
 
     for i in sorted_words:
-        print i
+        print (i)
 
     for word in sorted_words:
         index = word.find(game)
         if index != -1:
             ai_word = word
-            print 'ai choice now:', ai_word
+            print ('ai choice now:', ai_word)
             if index == 0:
                 game +=  ai_word[len(game)]
             else:
@@ -73,12 +89,12 @@ while answer != 'Q':
 
             break
     else:
-        print 'no such word in my dictionary', game
+        print ('no such word in my dictionary', game)
         break
 
     if game in words:
-        print '\nYou win! I completed the word:', game
+        print ('\nYou win! I completed the word:', game)
         answer = 'Q'
         continue
 
-    print 'Add a letter before or after: "' + game + '"'
+    print ('Add a letter before or after: "' + game + '"')
